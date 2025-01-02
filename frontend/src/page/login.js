@@ -54,7 +54,7 @@ const Login = () => {
       const dataRes = await fetchData.json();
       //   console.log(dataRes);
 
-      toast(dataRes.message);
+      toast.success(dataRes.message);
 
       if (dataRes.alert) {
         dispatch(loginRedux(dataRes));

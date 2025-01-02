@@ -30,7 +30,7 @@ const Header = () => {
           <div className="flex max-w-4xl mx-auto ">
             <img src={logo} className="rounded-full h-20 " />
             <h2 className=" font-bold text-2xl dark:text-red-700  p-4  md: hidden md:flex  ">
-              Aana Zoor
+             Chana Choor
             </h2>
           </div>
         </Link>
