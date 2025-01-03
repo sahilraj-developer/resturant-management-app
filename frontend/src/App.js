@@ -18,7 +18,6 @@ function App() {
       dispatch(setDataProduct(resData));
     })();
   }, []);
-  //  console.log(productData); // {productList: Array(0), cartItem: Array(0)}
   return (
     <>
       <Toaster />

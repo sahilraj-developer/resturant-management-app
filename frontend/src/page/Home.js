@@ -8,7 +8,8 @@ import AllProduct from "../component/AllProduct";
 
 const Home = () => {
   const productData = useSelector((state) => state.product.productList);
-  const homeProductCartList = productData.slice(20, 25);
+  // const homeProductCartList = productData.slice(20, 25);
+  const homeProductCartList = productData.slice(1, 4);
   const homeProductCartListVegetables = productData.filter(
     (el) => el.category === "vegetable",
     []
@@ -23,6 +24,7 @@ const Home = () => {
   const preveProduct = () => {
     slideProductRef.current.scrollLeft -= 200;
   };
+
 
   return (
     <div className="p-2 md:p-4">
@@ -96,7 +98,7 @@ const Home = () => {
           className="flex gap-5 overflow-scroll scrollbar-none scroll-smooth transition-all"
           ref={slideProductRef}
         >
-          {homeProductCartListVegetables[0]
+          {homeProductCartListVegetables?.length>0
             ? homeProductCartListVegetables.map((el) => {
                 return (
                   <CardFeature

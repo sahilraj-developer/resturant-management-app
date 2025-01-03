@@ -5,7 +5,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { ImagetoBase64 } from "../utility/ImagetoBase64";
 import { toast } from "react-hot-toast";
 
-const Singup = () => {
+const Signup = () => {
   const navigate = useNavigate();
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
@@ -18,38 +18,26 @@ const Singup = () => {
     confirmPassword: "",
     image: "",
   });
-  //   console.log(data);
 
-  const handleShowPassword = () => {
-    setShowPassword((preve) => !preve);
-  };
-  const handleShowConfirmPassword = () => {
-    setShowConfirmPassword((preve) => !preve);
-  };
+  const handleShowPassword = () => setShowPassword((prev) => !prev);
+  const handleShowConfirmPassword = () => setShowConfirmPassword((prev) => !prev);
 
   const handleOnChange = (e) => {
     const { name, value } = e.target;
-    setData((preve) => {
-      return {
-        ...preve,
-        [name]: value,
-      };
-    });
+    setData((prev) => ({
+      ...prev,
+      [name]: value,
+    }));
   };
 
   const handleUploadProfileImage = async (e) => {
     const data = await ImagetoBase64(e.target.files[0]);
-    // console.log(data);
-
-    setData((preve) => {
-      return {
-        ...preve,
-        image: data,
-      };
-    });
+    setData((prev) => ({
+      ...prev,
+      image: data,
+    }));
   };
 
-  console.log(process.env.REACT_APP_SERVER_DOMIN);
   const handleSubmit = async (e) => {
     e.preventDefault();
     const { firstName, email, password, confirmPassword } = data;
@@ -67,35 +55,30 @@ const Singup = () => {
         );
 
         const dataRes = await fetchData.json();
-
-        // alert(dataRes.message);
         toast(dataRes.message);
         if (dataRes.alert) {
           navigate("/login");
         }
       } else {
-        alert("password and confirm password not equal");
+        toast.error("Password and Confirm Password do not match");
       }
     } else {
-      alert("Please Enter required fields");
+      toast.error("Please fill out all required fields");
     }
   };
 
   return (
-    <div className="p-3 md:p-4">
-      <div className="w-full max-w-sm bg-white m-auto flex  flex-col p-4">
-        {/* <h1 className="text-center text-2xl font-bold">Sign up</h1> */}
-        <div className="w-20 h-20 overflow-hidden rounded-full drop-shadow-md shadow-md m-auto relative">
+    <div className="min-h-screen flex justify-center items-center bg-gray-100">
+      <div className="w-full max-w-lg bg-white shadow-md rounded-lg p-6">
+        <div className="flex justify-center mb-4">
           <img
-            src={data.image ? data.image : loginSignupImage}
-            className="w-full h-full"
+            src={data.image || loginSignupImage}
+            alt="Profile"
+            className="w-24 h-24 rounded-full object-cover"
           />
-          <label htmlFor="profileImage">
-            <div className="absolute bottom-0 h-1/3  bg-slate-500 bg-opacity-50 w-full text-center cursor-pointer">
-              <p className="text-sm p-1 text-white">Upload</p>
-            </div>
+          <label htmlFor="profileImage" className="absolute bottom-0">
             <input
-              type={"file"}
+              type="file"
               id="profileImage"
               accept="image/*"
               className="hidden"
@@ -103,79 +86,109 @@ const Singup = () => {
             />
           </label>
         </div>
-        <form className="w-full py-3 flex flex-col" onSubmit={handleSubmit}>
-          <label htmlFor="firstName">First Name</label>
-          <input
-            type={"text"}
-            id="firstName"
-            name="firstName"
-            className="mt-1 mb-2 w-full bg-slate-200 px-2 py-1 rounded focus-within:outline-blue-300"
-            value={data.firstName}
-            onChange={handleOnChange}
-          />
 
-          <label htmlFor="lastName">Last Name</label>
-          <input
-            type={"text"}
-            id="lastName"
-            name="lastName"
-            className="mt-1 mb-2 w-full bg-slate-200 px-2 py-1 rounded focus-within:outline-blue-300"
-            value={data.lastName}
-            onChange={handleOnChange}
-          />
-          <label htmlFor="email">Email</label>
-          <input
-            type={"email"}
-            id="email"
-            name="email"
-            className="mt-1 mb-2 w-full bg-slate-200 px-2 py-1 rounded focus-within:outline-blue-300"
-            value={data.email}
-            onChange={handleOnChange}
-          />
-          <label htmlFor="password">Password</label>
-          <div className="flex px-2 py-1 bg-slate-200 rounded mt-1 mb-2 focus-within:outline focus-within:outline-blue-300">
+        <h2 className="text-2xl font-semibold text-center text-gray-800 mb-6">
+          Create an Account
+        </h2>
+
+        <form className="space-y-4" onSubmit={handleSubmit}>
+          <div>
+            <label htmlFor="firstName" className="block text-sm font-medium text-gray-700">
+              First Name
+            </label>
             <input
-              type={showPassword ? "text" : "password"}
-              id="password"
-              name="password"
-              className="w-full bg-slate-200 border-none outline-none"
-              value={data.password}
+              type="text"
+              id="firstName"
+              name="firstName"
+              value={data.firstName}
               onChange={handleOnChange}
+              className="w-full px-3 py-2 border rounded-md focus:outline-blue-500"
+              placeholder="Enter your first name"
             />
-            <span
-              className="flex text-xl cursor-pointer"
-              onClick={handleShowPassword}
-            >
-              {showPassword ? <BiShow /> : <BiHide />}
-            </span>
           </div>
 
-          <label htmlFor="confirmpassword">Confirm Password</label>
-          <div className="flex px-2 py-1 bg-slate-200 rounded mt-1 mb-2  focus-within:outline focus-within:outline-blue-300">
+          <div>
+            <label htmlFor="lastName" className="block text-sm font-medium text-gray-700">
+              Last Name
+            </label>
             <input
-              type={showConfirmPassword ? "text" : "password"}
-              id="confirmpassword"
-              name="confirmPassword"
-              className=" w-full bg-slate-200 border-none outline-none "
-              value={data.confirmPassword}
+              type="text"
+              id="lastName"
+              name="lastName"
+              value={data.lastName}
               onChange={handleOnChange}
+              className="w-full px-3 py-2 border rounded-md focus:outline-blue-500"
+              placeholder="Enter your last name"
             />
-            <span
-              className="flex text-xl cursor-pointer"
-              onClick={handleShowConfirmPassword}
-            >
-              {showConfirmPassword ? <BiShow /> : <BiHide />}
-            </span>
           </div>
 
-          <button className="w-full max-w-[150px] m-auto  bg-red-500 hover:bg-red-600 cursor-pointer  text-white text-xl font-medium text-center py-1 rounded-full mt-4">
-            Sign up
+          <div>
+            <label htmlFor="email" className="block text-sm font-medium text-gray-700">
+              Email Address
+            </label>
+            <input
+              type="email"
+              id="email"
+              name="email"
+              value={data.email}
+              onChange={handleOnChange}
+              className="w-full px-3 py-2 border rounded-md focus:outline-blue-500"
+              placeholder="Enter your email"
+            />
+          </div>
+
+          <div>
+            <label htmlFor="password" className="block text-sm font-medium text-gray-700">
+              Password
+            </label>
+            <div className="flex items-center border rounded-md px-3 py-2">
+              <input
+                type={showPassword ? "text" : "password"}
+                id="password"
+                name="password"
+                value={data.password}
+                onChange={handleOnChange}
+                className="w-full outline-none"
+                placeholder="Enter your password"
+              />
+              <span onClick={handleShowPassword} className="cursor-pointer text-xl text-gray-500">
+                {showPassword ? <BiShow /> : <BiHide />}
+              </span>
+            </div>
+          </div>
+
+          <div>
+            <label htmlFor="confirmPassword" className="block text-sm font-medium text-gray-700">
+              Confirm Password
+            </label>
+            <div className="flex items-center border rounded-md px-3 py-2">
+              <input
+                type={showConfirmPassword ? "text" : "password"}
+                id="confirmPassword"
+                name="confirmPassword"
+                value={data.confirmPassword}
+                onChange={handleOnChange}
+                className="w-full outline-none"
+                placeholder="Re-enter your password"
+              />
+              <span onClick={handleShowConfirmPassword} className="cursor-pointer text-xl text-gray-500">
+                {showConfirmPassword ? <BiShow /> : <BiHide />}
+              </span>
+            </div>
+          </div>
+
+          <button
+            type="submit"
+            className="w-full py-2 bg-blue-500 text-white rounded-md hover:bg-blue-600"
+          >
+            Sign Up
           </button>
         </form>
-        <p className="text-left text-sm mt-2">
-          Already have account ?{" "}
-          <Link to={"/login"} className="text-red-500 underline">
-            Login
+
+        <p className="mt-4 text-center text-sm text-gray-600">
+          Already have an account?{" "}
+          <Link to="/login" className="text-blue-500 hover:underline">
+            Log In
           </Link>
         </p>
       </div>
@@ -183,4 +196,4 @@ const Singup = () => {
   );
 };
 
-export default Singup;
+export default Signup;

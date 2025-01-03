@@ -70,11 +70,15 @@
 // export default Menu;
 
 
+
+
+
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate, useParams } from "react-router-dom";
 import AllProduct from "../component/AllProduct";
 import { addCartItem } from "../redux/productSlide";
+import { FaStar } from "react-icons/fa"; // Added for review rating stars
 
 const Menu = () => {
   const { filterby } = useParams(); // use for get parameter from url
@@ -93,16 +97,20 @@ const Menu = () => {
   };
 
   return (
-    <div className="bg-gray-50 min-h-screen font-sans">
+    <div className="bg-gradient-to-r from-gray-100 via-gray-200 to-gray-300 min-h-screen font-sans">
       <div className="p-6 md:p-12">
-        <div className="max-w-7xl mx-auto md:flex bg-white rounded-lg shadow-xl p-6 md:p-8 space-y-6 md:space-y-0">
+        <div className="max-w-7xl mx-auto md:flex bg-white rounded-lg shadow-2xl p-6 md:p-8 space-y-6 md:space-y-0">
           {/* Product Image Section */}
-          <div className="md:w-1/2 mb-6 md:mb-0">
+          <div className="md:w-1/2 mb-6 md:mb-0 relative">
             <img
               src={productDisplay?.image}
               alt={productDisplay?.name}
               className="w-full h-96 object-cover rounded-lg shadow-lg transform transition-transform hover:scale-105"
             />
+            {/* Decorative Elements */}
+            <div className="absolute top-0 left-0 bg-gradient-to-r from-yellow-400 to-yellow-600 p-3 text-white rounded-tl-lg rounded-br-lg">
+              <span className="text-xl font-semibold">New Arrival</span>
+            </div>
           </div>
 
           {/* Product Details Section */}
@@ -119,13 +127,13 @@ const Menu = () => {
             <div className="flex gap-4 mb-6">
               <button
                 onClick={handleBuy}
-                className="bg-yellow-500 text-white py-3 px-6 rounded-lg transition-all duration-300 hover:bg-yellow-600 focus:outline-none"
+                className="bg-yellow-500 text-white py-3 px-6 rounded-lg transition-all duration-300 hover:bg-yellow-600 focus:outline-none shadow-md hover:scale-105"
               >
                 Buy Now
               </button>
               <button
                 onClick={handleAddCartProduct}
-                className="bg-gray-800 text-white py-3 px-6 rounded-lg transition-all duration-300 hover:bg-gray-700 focus:outline-none"
+                className="bg-gray-800 text-white py-3 px-6 rounded-lg transition-all duration-300 hover:bg-gray-700 focus:outline-none shadow-md hover:scale-105"
               >
                 Add to Cart
               </button>
@@ -162,33 +170,62 @@ const Menu = () => {
 
       {/* Customer Reviews */}
       <div className="bg-gray-100 py-8">
-        <div className="max-w-7xl mx-auto px-6">
-          <h2 className="text-3xl font-semibold text-gray-800 mb-6">Customer Reviews</h2>
-          <div className="flex gap-6 flex-wrap">
-            {/* Review Card */}
-            <div className="bg-white p-6 rounded-lg shadow-lg w-full md:w-1/3">
-              <p className="font-semibold text-gray-800">John Doe</p>
-              <p className="text-gray-600 mb-4">"An amazing dish! I can't get enough of it. The flavors are incredible!"</p>
-              <div className="text-yellow-500">⭐⭐⭐⭐⭐</div>
-            </div>
-            {/* Review Card */}
-            <div className="bg-white p-6 rounded-lg shadow-lg w-full md:w-1/3">
-              <p className="font-semibold text-gray-800">Jane Smith</p>
-              <p className="text-gray-600 mb-4">"Great presentation and taste. The food was fresh, and delivery was fast!"</p>
-              <div className="text-yellow-500">⭐⭐⭐⭐</div>
-            </div>
-            {/* Review Card */}
-            <div className="bg-white p-6 rounded-lg shadow-lg w-full md:w-1/3">
-              <p className="font-semibold text-gray-800">Alex Brown</p>
-              <p className="text-gray-600 mb-4">"A must-try for all food lovers! Absolutely delicious!"</p>
-              <div className="text-yellow-500">⭐⭐⭐⭐⭐</div>
-            </div>
-          </div>
+  <div className="max-w-7xl mx-auto px-6">
+    <h2 className="text-3xl font-semibold text-gray-800 mb-6">Customer Reviews</h2>
+    <div className="flex gap-6 flex-wrap">
+      {/* Review Card */}
+      <div className="bg-white p-6 rounded-lg shadow-lg w-full md:w-1/3">
+        <div className="flex items-center mb-4">
+          <img
+            src="https://randomuser.me/api/portraits/men/1.jpg" // Dummy image URL
+            alt="John Doe"
+            className="w-12 h-12 rounded-full object-cover mr-4"
+          />
+          <p className="font-semibold text-gray-800">John Doe</p>
+        </div>
+        <p className="text-gray-600 mb-4">"An amazing dish! I can't get enough of it. The flavors are incredible!"</p>
+        <div className="text-yellow-500 flex items-center">
+          <FaStar /> <FaStar /> <FaStar /> <FaStar /> <FaStar />
         </div>
       </div>
 
+      {/* Review Card */}
+      <div className="bg-white p-6 rounded-lg shadow-lg w-full md:w-1/3">
+        <div className="flex items-center mb-4">
+          <img
+            src="https://randomuser.me/api/portraits/women/2.jpg" // Dummy image URL
+            alt="Jane Smith"
+            className="w-12 h-12 rounded-full object-cover mr-4"
+          />
+          <p className="font-semibold text-gray-800">Jane Smith</p>
+        </div>
+        <p className="text-gray-600 mb-4">"Great presentation and taste. The food was fresh, and delivery was fast!"</p>
+        <div className="text-yellow-500 flex items-center">
+          <FaStar /> <FaStar /> <FaStar /> <FaStar />
+        </div>
+      </div>
+
+      {/* Review Card */}
+      <div className="bg-white p-6 rounded-lg shadow-lg w-full md:w-1/3">
+        <div className="flex items-center mb-4">
+          <img
+            src="https://randomuser.me/api/portraits/men/3.jpg" // Dummy image URL
+            alt="Alex Brown"
+            className="w-12 h-12 rounded-full object-cover mr-4"
+          />
+          <p className="font-semibold text-gray-800">Alex Brown</p>
+        </div>
+        <p className="text-gray-600 mb-4">"A must-try for all food lovers! Absolutely delicious!"</p>
+        <div className="text-yellow-500 flex items-center">
+          <FaStar /> <FaStar /> <FaStar /> <FaStar /> <FaStar />
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
       {/* Related Products */}
-      <div className="mt-12">
+      <div className="mt-12 px-4">
         <AllProduct heading="Related Products" />
       </div>
     </div>

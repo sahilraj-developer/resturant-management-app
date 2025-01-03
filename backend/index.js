@@ -3,6 +3,7 @@ const cors = require("cors");
 const mongoose = require("mongoose");
 const dotenv = require("dotenv").config();
 const Stripe = require("stripe");
+const connectDb = require("./config/db");
 
 const app = express();
 app.use(cors());
@@ -10,12 +11,14 @@ app.use(express.json({ limit: "10mb" }));
 
 const PORT = process.env.PORT || 8080;
 // MONGODB CONNACTION
-// console.log(process.env.MONGODB_URL);
 mongoose.set("strictQuery", false);
-mongoose
-  .connect(process.env.MONGODB_URL)
-  .then(() => console.log("Connect to Databse"))
-  .catch((err) => console.log(err));
+
+connectDb(process.env.MONGODB_URL)
+
+// mongoose
+//   .connect(process.env.MONGODB_URL, { useNewUrlParser: true, useUnifiedTopology: true })
+//   .then(() => console.log("Connected to Database"))
+//   .catch((err) => console.error("Database connection error:", err));
 
 //schema
 const userSchema = mongoose.Schema({
@@ -39,26 +42,30 @@ app.get("/", (req, res) => {
 });
 //sign up
 app.post("/signup", async (req, res) => {
-  // console.log(req.body);
   const { email } = req.body;
+  
+  try {
+    const result = await userModel.findOne({ email: email });
 
-  userModel.findOne({ email: email }, (err, result) => {
-    // console.log(result);
-    console.log(err);
     if (result) {
-      res.send({ message: "Email id is already register", alert: false });
+      res.send({ message: "Email id is already registered", alert: false });
     } else {
-      const data = userModel(req.body);
-      const save = data.save();
-      res.send({ message: "Successfully sign up", alert: true });
+      const data = new userModel(req.body);
+      await data.save();
+      res.send({ message: "Successfully signed up", alert: true });
     }
-  });
+  } catch (err) {
+    console.error(err);
+    res.status(500).send("Error occurred during sign-up");
+  }
 });
 //api login
-app.post("/login", (req, res) => {
-  // console.log(req.body);
+app.post("/login", async (req, res) => {
   const { email } = req.body;
-  userModel.findOne({ email: email }, (err, result) => {
+  
+  try {
+    const result = await userModel.findOne({ email: email });
+
     if (result) {
       const dataSend = {
         _id: result._id,
@@ -67,9 +74,8 @@ app.post("/login", (req, res) => {
         email: result.email,
         image: result.image,
       };
-      //   console.log(dataSend);
       res.send({
-        message: "Login is successfully",
+        message: "Login is successful",
         alert: true,
         data: dataSend,
       });
@@ -79,8 +85,12 @@ app.post("/login", (req, res) => {
         alert: false,
       });
     }
-  });
+  } catch (err) {
+    console.error(err);
+    res.status(500).send("Error occurred during login");
+  }
 });
+
 
 //product section
 
@@ -104,9 +114,29 @@ app.post("/uploadProduct", async (req, res) => {
 
 // get product
 app.get("/product", async (req, res) => {
-  const data = await productModel.find({});
-  res.send(JSON.stringify(data));
+  try {
+    const data = await productModel.find({});
+    console.log("Data fetched from database:", data);
+
+    // Map the products to cleanly handle image data if it's base64
+    const products = data.map((product) => {
+      return {
+        _id: product._id,
+        name: product.name,
+        category: product.category,
+        image: product.image, // Assuming this contains base64 image data
+        price: product.price,
+        description: product.description,
+      };
+    });
+
+    res.json(products); // Send data as a JSON response
+  } catch (err) {
+    console.error("Error fetching products:", err);
+    res.status(500).send("Error fetching products");
+  }
 });
+
 
 /*****payment getWay */
 // console.log(process.env.STRIPE_SECRET_KEY);

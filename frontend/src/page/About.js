@@ -29,7 +29,7 @@ const About = () => {
       <div
         className="relative bg-cover bg-center h-96"
         style={{
-          backgroundImage: "url('https://source.unsplash.com/1600x900/?restaurant,interior')",
+          backgroundImage: "url('https://media.istockphoto.com/id/1829241109/photo/enjoying-a-brunch-together.jpg?s=2048x2048&w=is&k=20&c=0UD2e_KMbkkMcx4j9ZaxGf-z1nMHxch9hi3_0BQmuAo=')",
         }}
       >
         <div className="absolute inset-0 bg-black bg-opacity-50 flex items-center justify-center">
@@ -76,7 +76,7 @@ const About = () => {
           <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-12">
             <div className="text-center">
               <img
-                src="https://via.placeholder.com/150"
+                src="https://plus.unsplash.com/premium_photo-1671656349322-41de944d259b?q=80&w=1974&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
                 alt="Chef John"
                 className="rounded-full mx-auto mb-4"
               />
@@ -86,7 +86,7 @@ const About = () => {
             </div>
             <div className="text-center">
               <img
-                src="https://via.placeholder.com/150"
+                src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?q=80&w=1974&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
                 alt="Sarah Smith"
                 className="rounded-full mx-auto mb-4"
               />
@@ -96,7 +96,7 @@ const About = () => {
             </div>
             <div className="text-center">
               <img
-                src="https://via.placeholder.com/150"
+                src="https://plus.unsplash.com/premium_photo-1670071482460-5c08776521fe?q=80&w=1974&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
                 alt="Mike Lee"
                 className="rounded-full mx-auto mb-4"
               />
@@ -113,7 +113,7 @@ const About = () => {
           <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-12">
             <div className="bg-white p-6 rounded-lg shadow-lg">
               <img
-                src="https://via.placeholder.com/400x300?text=Dish+1"
+                src="https://plus.unsplash.com/premium_photo-1661771822467-e516ca075314?q=80&w=1974&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
                 alt="Dish 1"
                 className="w-full h-48 object-cover rounded-t-lg"
               />
@@ -122,7 +122,7 @@ const About = () => {
             </div>
             <div className="bg-white p-6 rounded-lg shadow-lg">
               <img
-                src="https://via.placeholder.com/400x300?text=Dish+2"
+                src="https://plus.unsplash.com/premium_photo-1673590981774-d9f534e0c617?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NXx8ZGlzaHxlbnwwfHwwfHx8MA%3D%3D"
                 alt="Dish 2"
                 className="w-full h-48 object-cover rounded-t-lg"
               />
@@ -131,7 +131,7 @@ const About = () => {
             </div>
             <div className="bg-white p-6 rounded-lg shadow-lg">
               <img
-                src="https://via.placeholder.com/400x300?text=Dish+3"
+                src="https://plus.unsplash.com/premium_photo-1674106348025-0d45c1b8ff4a?q=80&w=1964&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
                 alt="Dish 3"
                 className="w-full h-48 object-cover rounded-t-lg"
               />
