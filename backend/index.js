@@ -116,7 +116,7 @@ app.post("/uploadProduct", async (req, res) => {
 app.get("/product", async (req, res) => {
   try {
     const data = await productModel.find({});
-    console.log("Data fetched from database:", data);
+    // console.log("Data fetched from database:", data);
 
     // Map the products to cleanly handle image data if it's base64
     const products = data.map((product) => {
@@ -141,9 +141,23 @@ app.get("/product", async (req, res) => {
 /*****payment getWay */
 // console.log(process.env.STRIPE_SECRET_KEY);
 
+const verifyToken = (req, res, next) => {
+  const token = req.headers.authorization?.split(" ")[1];
+  if (!token) return res.status(401).json({ message: "Token missing" });
+
+  // jwt.verify(token, process.env.JWT_SECRET, (err, user) => {
+  //   if (err) return res.status(403).json({ message: "Token invalid" });
+  //   req.user = user;
+  //   next();
+  // });
+  next();
+};
+
+
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY);
 
-app.post("/create-checkout-session", async (req, res) => {
+app.post("/create-checkout-session",verifyToken, async (req, res) => {
+
   try {
     const params = {
       submit_type: "pay",
@@ -177,6 +191,7 @@ app.post("/create-checkout-session", async (req, res) => {
     // console.log(session)
     res.status(200).json(session.id);
   } catch (err) {
+    console.log("err",err)
     res.status(err.statusCode || 500).json(err.message);
   }
 });
