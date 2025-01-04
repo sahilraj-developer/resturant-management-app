@@ -6,6 +6,7 @@ import { BsCartFill } from "react-icons/bs";
 import { useDispatch, useSelector } from "react-redux";
 import { logoutRedux } from "../redux/userSlice";
 import { toast } from "react-hot-toast";
+import SweetAlert from "sweetalert2";
 
 const Header = () => {
   const [showMenu, setShowMenu] = useState(false);
@@ -13,91 +14,143 @@ const Header = () => {
   const dispatch = useDispatch();
 
   const handleShowMenu = () => {
-    setShowMenu((preve) => !preve);
+    setShowMenu((prev) => !prev);
   };
+
+  // const handleLogout = () => {
+  //   dispatch(logoutRedux());
+  //   toast("Logout successfully");
+  // };
+
   const handleLogout = () => {
-    dispatch(logoutRedux());
-    toast("Logout successfully");
+    SweetAlert.fire({
+      title: "Are you sure?",
+      text: "You will be logged out of your account.",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#d33",
+      cancelButtonColor: "#3085d6",
+      confirmButtonText: "Yes, logout!",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        dispatch(logoutRedux());
+        toast.success("Logout successfully");
+      }
+    });
   };
 
   const cartItemNumber = useSelector((state) => state.product.cartItem);
-  return (
-    <header className="fixed shadow-md w-full h-16 px-2 md:px-4 z-50 bg-white">
-      {/* desktop */}
 
-      <div className="flex items-center h-full justify-between">
-        <Link to={""}>
-          <div className="flex max-w-4xl mx-auto ">
-            <img src={logo} className="rounded-full h-20 " />
-            <h2 className=" font-bold text-2xl dark:text-red-700  p-4  md: hidden md:flex  ">
-             Chana Choor
-            </h2>
-          </div>
+  return (
+    <header className="fixed shadow-lg w-full h-16 px-4 z-50 bg-white">
+      {/* Desktop */}
+      <div className="flex items-center h-full justify-between max-w-screen-xl mx-auto">
+        <Link to={""} className="flex items-center space-x-3">
+          <img src={logo} alt="Logo" className="rounded-full h-12 md:h-16" />
+          <h2 className="text-2xl font-semibold text-red-600 hidden md:block">
+            Chana Choor
+          </h2>
         </Link>
 
-        <div className="flex items-center gap-4 md:gap-7">
-          <nav className="gap-4 md:gap-6 text-base md:text-lg hidden md:flex">
-            <Link to={""}>Home</Link>
-            <Link to={"menu/646b5548acd0a88a674b9429"}>Menu</Link>
-            <Link to={"about"}>About</Link>
-            <Link to={"contact"}>Contact</Link>
+        <div className="flex items-center gap-6">
+          <nav className="hidden md:flex gap-6 text-lg font-medium">
+            <Link to={""} className="hover:text-red-600 transition-all">
+              Home
+            </Link>
+            <Link
+              to={"menu/646b5548acd0a88a674b9429"}
+              className="hover:text-red-600 transition-all"
+            >
+              Menu
+            </Link>
+            <Link to={"about"} className="hover:text-red-600 transition-all">
+              About
+            </Link>
+            <Link
+              to={"contact"}
+              className="hover:text-red-600 transition-all"
+            >
+              Contact
+            </Link>
           </nav>
-          <div className="text-2xl text-slate-600 relative">
-            <Link to={"cart"}>
+
+          <div className="relative text-2xl text-slate-600">
+            <Link to={"cart"} className="relative">
               <BsCartFill />
-              <div className="absolute -top-1 -right-1 text-white bg-red-500 h-4 w-4 rounded-full m-0 p-0 text-sm text-center ">
+              <div className="absolute -top-1 -right-1 text-white bg-red-500 h-5 w-5 rounded-full text-xs flex items-center justify-center">
                 {cartItemNumber.length}
               </div>
             </Link>
           </div>
-          <div className=" text-slate-600" onClick={handleShowMenu}>
-            <div className="text-3xl cursor-pointer w-8 h-8 rounded-full overflow-hidden drop-shadow-md">
+
+          <div className="relative" onClick={handleShowMenu}>
+            <div className="cursor-pointer w-8 h-8 rounded-full overflow-hidden shadow-md">
               {userData.image ? (
-                <img src={userData.image} className="h-full w-full" />
+                <img src={userData.image} className="w-full h-full" alt="User" />
               ) : (
-                <HiOutlineUserCircle />
+                <HiOutlineUserCircle className="text-3xl text-gray-600" />
               )}
             </div>
+
             {showMenu && (
-              <div className="absolute right-2 bg-white py-2  shadow drop-shadow-md flex flex-col min-w-[120px] text-center">
+              <div className="absolute right-0 bg-white py-2 shadow-md flex flex-col min-w-[120px] text-center border border-gray-300 rounded-md">
                 {userData.email === process.env.REACT_APP_ADMIN_EMAIL && (
                   <Link
                     to={"newproduct"}
-                    className="whitespace-nowrap cursor-pointer px-2"
+                    className="whitespace-nowrap cursor-pointer px-4 py-2 text-gray-700 hover:bg-gray-200"
                   >
                     New product
                   </Link>
                 )}
 
-                {userData.image ? (
-                  <p
-                    className="cursor-pointer text-white px-2 bg-red-500"
+{userData.firstName ? (
+  <>
+
+                     <button
+                    className="cursor-pointer text-white px-4 py-2 text-black"
                     onClick={handleLogout}
                   >
-                    Logout ({userData.firstName}){" "}
-                  </p>
+                    Profile
+                  </button>
+ 
+                  <button
+                    className="cursor-pointer text-white px-4 py-2 bg-red-500 hover:bg-red-600 flex "
+                    onClick={handleLogout}
+                  >
+                    Logout ({userData.firstName})
+                  </button>
+                  </>
                 ) : (
                   <Link
                     to={"login"}
-                    className="whitespace-nowrap cursor-pointer px-2"
+                    className="whitespace-nowrap cursor-pointer px-4 py-2 text-gray-700 hover:bg-gray-200"
                   >
                     Login
                   </Link>
                 )}
                 <nav className="text-base md:text-lg flex flex-col md:hidden">
-                  <Link to={""} className="px-2 py-1">
+                  <Link
+                    to={""}
+                    className="px-4 py-2 text-gray-700 hover:bg-gray-200"
+                  >
                     Home
                   </Link>
                   <Link
                     to={"menu/646b5548acd0a88a674b9429"}
-                    className="px-2 py-1"
+                    className="px-4 py-2 text-gray-700 hover:bg-gray-200"
                   >
                     Menu
                   </Link>
-                  <Link to={"about"} className="px-2 py-1">
+                  <Link
+                    to={"about"}
+                    className="px-4 py-2 text-gray-700 hover:bg-gray-200"
+                  >
                     About
                   </Link>
-                  <Link to={"contact"} className="px-2 py-1">
+                  <Link
+                    to={"contact"}
+                    className="px-4 py-2 text-gray-700 hover:bg-gray-200"
+                  >
                     Contact
                   </Link>
                 </nav>
@@ -107,7 +160,7 @@ const Header = () => {
         </div>
       </div>
 
-      {/* mobile */}
+      {/* Mobile */}
     </header>
   );
 };

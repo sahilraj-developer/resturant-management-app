@@ -4,123 +4,125 @@ import Wrapper from "./Wrapper";
 
 const Footer = () => {
   return (
-    <footer className="bg-gradient-to-r from-red-800 via-yellow-600 to-yellow-500 text-white pt-14 pb-3">
-      <Wrapper className="flex justify-between flex-col md:flex-row gap-[50px] md:gap-0">
+    <footer className="bg-gradient-to-r from-gray-800 via-purple-600 to-pink-500 text-white py-14">
+      <Wrapper className="flex flex-col md:flex-row justify-between items-start gap-16">
         {/* LEFT START */}
-        <div className="flex gap-[50px] md:gap-[75px] lg:gap-[100px] flex-col md:flex-row">
+        <div className="flex flex-col md:flex-row gap-16 md:gap-24 lg:gap-32">
           {/* MENU START */}
-          <div className="flex flex-col gap-3 shrink-0">
-            <div className="font-oswald font-medium uppercase text-sm cursor-pointer">
-              ABERDEEN BAZAR
+          <div className="flex flex-col gap-5">
+            <div className="font-semibold uppercase text-lg cursor-pointer hover:text-gray-200 transition-all">
+              Chana Choor
             </div>
-            <div className="font-oswald font-medium uppercase text-sm cursor-pointer">
-              become a partner
+            <div className="font-semibold uppercase text-lg cursor-pointer hover:text-gray-200 transition-all">
+              Become a partner
             </div>
-            <div className="font-oswald font-medium uppercase text-sm cursor-pointer">
-              sign up for email
+            <div className="font-semibold uppercase text-lg cursor-pointer hover:text-gray-200 transition-all">
+              Sign up for email
             </div>
-            <div className="font-oswald font-medium uppercase text-sm cursor-pointer">
-              PIN 766015
+            <div className="font-semibold uppercase text-lg cursor-pointer hover:text-gray-200 transition-all">
+              PIN 834001
             </div>
-            <div className="font-oswald font-medium uppercase text-sm cursor-pointer">
-              PH NO +91 907-844-5836
+            <div className="font-semibold uppercase text-lg cursor-pointer hover:text-gray-200 transition-all">
+              PH NO +91 907-xxx-xxxx
             </div>
           </div>
           {/* MENU END */}
 
-          {/* NORMAL MENU START */}
-          <div className="flex gap-[50px] md:gap-[75px] lg:gap-[100px] shrink-0">
-            {/* MENU START */}
-            <div className="flex flex-col gap-3">
-              <div className="font-oswald font-medium uppercase text-sm">
-                get help
-              </div>
-              <div className="text-sm text-white/[0.5] hover:text-white cursor-pointer">
+          {/* HELP & ABOUT MENU START */}
+          <div className="flex gap-16 md:gap-24 lg:gap-32">
+            {/* HELP MENU */}
+            <div className="flex flex-col gap-5">
+              <div className="font-semibold uppercase text-lg">Get help</div>
+              <div className="text-sm text-white/[0.7] hover:text-white cursor-pointer transition-all">
                 Order Status
               </div>
-              <div className="text-sm text-white/[0.5] hover:text-white cursor-pointer">
+              <div className="text-sm text-white/[0.7] hover:text-white cursor-pointer transition-all">
                 Delivery
               </div>
-              <div className="text-sm text-white/[0.5] hover:text-white cursor-pointer">
+              <div className="text-sm text-white/[0.7] hover:text-white cursor-pointer transition-all">
                 Returns
               </div>
-              <div className="text-sm text-white/[0.5] hover:text-white cursor-pointer">
+              <div className="text-sm text-white/[0.7] hover:text-white cursor-pointer transition-all">
                 Payment Options
               </div>
-              <div className="text-sm text-white/[0.5] hover:text-white cursor-pointer">
+              <div className="text-sm text-white/[0.7] hover:text-white cursor-pointer transition-all">
                 Contact Us
               </div>
             </div>
-            {/* MENU END */}
-
-            {/* MENU START */}
-            <div className="flex flex-col gap-3">
-              <div className="font-oswald font-medium uppercase text-sm">
-                About nike
-              </div>
-              <div className="text-sm text-white/[0.5] hover:text-white cursor-pointer">
+            {/* ABOUT MENU */}
+            <div className="flex flex-col gap-5">
+              <div className="font-semibold uppercase text-lg">About Nike</div>
+              <div className="text-sm text-white/[0.7] hover:text-white cursor-pointer transition-all">
                 News
               </div>
-              <div className="text-sm text-white/[0.5] hover:text-white cursor-pointer">
+              <div className="text-sm text-white/[0.7] hover:text-white cursor-pointer transition-all">
                 Careers
               </div>
-              <div className="text-sm text-white/[0.5] hover:text-white cursor-pointer">
+              <div className="text-sm text-white/[0.7] hover:text-white cursor-pointer transition-all">
                 Investors
               </div>
-              <div className="text-sm text-white/[0.5] hover:text-white cursor-pointer">
+              <div className="text-sm text-white/[0.7] hover:text-white cursor-pointer transition-all">
                 Sustainability
               </div>
             </div>
-            {/* MENU END */}
           </div>
-          {/* NORMAL MENU END */}
+          {/* HELP & ABOUT MENU END */}
         </div>
         {/* LEFT END */}
 
         {/* RIGHT START */}
-        <div className="flex gap-4 justify-center md:justify-start">
+        <div className="flex gap-6 justify-center md:justify-start items-center">
           <div
             onClick={() => window.open("https://facebook.com", "_blank")}
-            className="w-10 h-10 rounded-full bg-white/[0.25] flex items-center justify-center bg-gradient-to-r from-red-800  to-yellow-500  hover:via-yellow-600 cursor-pointer"
+            className="w-12 h-12 rounded-full bg-white/[0.25] flex items-center justify-center bg-gradient-to-r from-gray-800 to-purple-600 hover:via-pink-500 cursor-pointer transition-all"
           >
-            <FaFacebookF size={20} />
+            <FaFacebookF size={24} />
           </div>
 
           <div
             onClick={() => window.open("https://twitter.com", "_blank")}
-            className="w-10 h-10 rounded-full bg-white/[0.25] flex items-center justify-center bg-gradient-to-r from-red-800  to-yellow-500 hover:via-yellow-600 cursor-pointer"
+            className="w-12 h-12 rounded-full bg-white/[0.25] flex items-center justify-center bg-gradient-to-r from-gray-800 to-purple-600 hover:via-pink-500 cursor-pointer transition-all"
           >
-            <FaTwitter size={20} />
+            <FaTwitter size={24} />
           </div>
 
-          <div className="w-10 h-10 rounded-full bg-white/[0.25] flex items-center justify-center bg-gradient-to-r from-red-800  to-yellow-500 hover:via-yellow-600 cursor-pointer">
-            <FaYoutube size={20} />
+          <div
+            onClick={() => window.open("https://youtube.com", "_blank")}
+            className="w-12 h-12 rounded-full bg-white/[0.25] flex items-center justify-center bg-gradient-to-r from-gray-800 to-purple-600 hover:via-pink-500 cursor-pointer transition-all"
+          >
+            <FaYoutube size={24} />
           </div>
-          <div className="w-10 h-10 rounded-full bg-white/[0.25] flex items-center justify-center bg-gradient-to-r from-red-800  to-yellow-500 hover:via-yellow-600 cursor-pointer">
-            <FaInstagram size={20} />
+
+          <div
+            onClick={() => window.open("https://instagram.com", "_blank")}
+            className="w-12 h-12 rounded-full bg-white/[0.25] flex items-center justify-center bg-gradient-to-r from-gray-800 to-purple-600 hover:via-pink-500 cursor-pointer transition-all"
+          >
+            <FaInstagram size={24} />
           </div>
         </div>
         {/* RIGHT END */}
       </Wrapper>
-      <Wrapper className="flex justify-between mt-10 flex-col md:flex-row gap-[10px] md:gap-0">
+
+      {/* BOTTOM COPYRIGHT AND LINKS */}
+      <Wrapper className="flex justify-between mt-16 flex-col md:flex-row gap-4">
         {/* LEFT START */}
-        <div className="text-[12px] text-white/[0.5] hover:text-white cursor-pointer text-center md:text-left">
+        <div className="text-sm text-white/[0.6] hover:text-white cursor-pointer text-center md:text-left">
           © 2023 OM, Inc. All Rights Reserved
         </div>
         {/* LEFT END */}
 
         {/* RIGHT START */}
-        <div className="flex gap-2 md:gap-5 text-center md:text-left flex-wrap justify-center">
-          <div className="text-[12px] text-white/[0.5] hover:text-white cursor-pointer">
+        <div className="flex gap-4 text-center md:text-left flex-wrap justify-center md:justify-start">
+          <div className="text-sm text-white/[0.6] hover:text-white cursor-pointer transition-all">
             Guides
           </div>
-          <div className="text-[12px] text-white/[0.5] hover:text-white cursor-pointer">
+          <div className="text-sm text-white/[0.6] hover:text-white cursor-pointer transition-all">
             Terms of Sale
           </div>
-          <div className="text-[12px] text-white/[0.5] hover:text-white cursor-pointer">
+          <div className="text-sm text-white/[0.6] hover:text-white cursor-pointer transition-all">
             Terms of Use
           </div>
-          <div className="text-[12px] text-white/[0.5] hover:text-white cursor-pointer">
+          <div className="text-sm text-white/[0.6] hover:text-white cursor-pointer transition-all">
             Privacy Policy
           </div>
         </div>

@@ -9,6 +9,7 @@ import { loginRedux } from "../redux/userSlice";
 const Login = () => {
   const navigate = useNavigate();
   const userData = useSelector((state) => state);
+  console.log("userDatauserData",userData)
   const dispatch = useDispatch();
 
   const [showPassword, setShowPassword] = useState(false);
@@ -48,7 +49,12 @@ const Login = () => {
       toast.success(dataRes.message);
 
       if (dataRes.alert) {
+        // Dispatch the data to Redux store
         dispatch(loginRedux(dataRes));
+
+        // Save user data to localStorage
+        localStorage.setItem("user", JSON.stringify(dataRes));
+
         setTimeout(() => {
           navigate("/");
         }, 1000);
@@ -57,7 +63,7 @@ const Login = () => {
       toast.error("Please enter all required fields!");
     }
   };
-
+  
   return (
     <div className="p-4 md:p-6 flex justify-center items-center min-h-screen bg-gradient-to-r from-blue-100 via-purple-100 to-pink-100">
       <div className="w-full max-w-md bg-white shadow-lg rounded-lg p-6 transform transition-transform hover:scale-105">
